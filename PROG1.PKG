@@ -1,0 +1,6 @@
+with TEXT_IO; use TEXT_IO;
+procedure PROG1 is
+begin
+PUT("Long live ADA!!!");
+end PROG1;
+

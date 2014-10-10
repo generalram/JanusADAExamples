@@ -1,0 +1,32 @@
+-- PROGRAM 4 in ADA, Indian Problem. Norman King 10/7/1989
+WITH text_io; USE text_io;
+PROCEDURE prog4 is
+year : INTEGER;
+balance, sbalance, interest, rate : Long_Float;
+PACKAGE int_io is NEW integer_io (INTEGER); use int_io;
+PACKAGE real_io is NEW Float_io (Long_Float); use real_io;
+BEGIN
+PUT_LINE("  YEAR    STARTING BALANCE      INTEREST THIS YEAR  ENDING BALANCE");
+rate:= 0.03;
+balance:= 24.0;   --Dollars deposited
+FOR year in 1627..1989 loop
+sbalance:= balance;
+interest:= balance * rate;
+balance := sbalance + interest;
+if (Year = 1627) or (Year MOD 100 =0 ) or (Year = 1989) THEN
+ PUT(year);
+ PUT("    ");
+ PUT(sbalance, Fore=>6, Aft=>2, Exp=>0);
+ PUT("           ");
+ PUT(interest, Fore=>6, Aft=>2, Exp=>0);
+ PUT("            ");
+ PUT(balance, Fore=>6, Aft=>2, Exp=>0);
+ NEW_LINE;
+end if;
+END LOOP;
+ NEW_LINE;
+ PUT("Final Balance : $");
+ PUT(balance, Fore=>6, Aft=>2, Exp=>0);
+ NEW_LINE;
+END prog4;
+

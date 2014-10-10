@@ -1,0 +1,29 @@
+-- Leap Year program 10, by Norman King 10/28/1989
+with TEXT_io; use TEXT_IO;
+PROCEDURE prog10 is
+year,count : INTEGER;
+PACKAGE int_io is NEW INTEGER_IO (INTEGER); use int_io;
+begin
+count := 0;
+ FOR year IN 1500..1988 loop
+  IF count >= 10 THEN
+  NEW_LINE;
+  count:=0;
+  end if;
+   IF ((year MOD 400) = 0) THEN
+    GOTO printyear;
+   ELSIF ((year MOD 100) = 0) THEN
+    GOTO noleap;
+   ELSIF ((year MOD 4) = 0) THEN
+    GOTO printyear;
+   ELSE GOTO noleap;
+   end if;
+<<printyear>>
+  PUT(YEAR);
+  COUNT:=COUNT+1;
+<<noleap>>
+
+end loop;
+NEW_LINE;
+end prog10;
+

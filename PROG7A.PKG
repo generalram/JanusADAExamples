@@ -1,0 +1,64 @@
+-- Program 7 by Norman King. Create a payroll record
+WITH SEQUENTIAL_IO;
+WITH text_io; USE text_io;
+PROCEDURE prog7a is
+TYPE person is
+     RECORD
+     name: STRING (1..20);
+	code,num:INTEGER;
+     rate:FLOAT;
+ end RECORD;
+i,j:INTEGER;
+N:INTEGER := -1;
+file: ARRAY (1..10) of person;
+temp: person;
+text: file_type;
+max : CONSTANT INTEGER := 65;
+file_name: STRING (1..12);
+mchars: INTEGER;  --dummy pad to get a string
+PACKAGE PERSON_IO is new SEQUENTIAL_IO(ELEMENT_TYPE => PERSON);
+USE PERSON_IO;
+PACKAGE INT_IO is NEW INTEGER_IO(INTEGER); USE INT_IO;
+PACKAGE REAL_IO is NEW FLOAT_IO(FLOAT); USE REAL_IO;
+begin
+mchars := 11;
+PUT("Enter file_name: ");
+GET_LINE(file_name,mchars);
+mchars := 20;
+n:=n+1;
+PUT("Number: (0=End)");
+GET(file(n).num);
+IF file(n).num /= 0 THEN
+PUT("NAME");
+GET_LINE(file(n).name,mchars);
+PUT("Code: ");
+GET(file(n).code);
+PUT("Rate: ");
+GET(file(n).rate);
+end IF;
+  WHILE (file(n).num/=0) loop
+  n:=n-1;
+  end loop;
+
+CREATE(text,OUT_FILE,file_name);
+
+ FOR i in 0..(n-1) loop
+  FOR j in (i+1)..n loop
+   IF (file(i).num>file(j).num) THEN
+   temp:=file(i);
+   file(i):=file(j);
+   file(j):=temp;
+   end IF;
+  end loop;
+PERSION_IO.WRITE(file_name,file(i).num);
+PERSION_IO.WRITE(file_name,file(i).name);
+PERSION_IO.WRITE(file_name,file(i).code);
+PERSION_IO.WRITE(file_name,file(i).rate);
+ end loop;
+PERSION_IO.WRITE(file_name,file(i).num);
+PERSION_IO.WRITE(file_name,file(i).name);
+PERSION_IO.WRITE(file_name,file(i).code);
+PERSION_IO.WRITE(file_name,file(i).rate);
+CLOSE(file_name);
+end prog7a;
+

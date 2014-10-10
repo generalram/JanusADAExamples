@@ -1,0 +1,55 @@
+-- Program 6 in ADA, Matrix Transfixing by Norman King 10/28/1989
+with TEXT_IO; use TEXT_IO;
+PROCEDURE prog6a is
+type MATRIX1 is ARRAY (1..4,1..5) of INTEGER;
+type MATRIX2 is ARRAY (1..5,1..4) of INTEGER;
+m: MATRIX1;
+n: MATRIX2;
+i,j,count: INTEGER;
+PACKAGE int_io is NEW INTEGER_IO (INTEGER); use int_io;
+FUNCTION TRANSPOSE_MATRIX (m:IN MATRIX1;n:IN MATRIX2)RETURN MATRIX2 is
+i,j:INTEGER;
+TEMP:MATRIX2;
+begin
+ TEMP:=n;
+ FOR i IN 1..5 loop
+  FOR j in 1..4 loop
+   TEMP(i,j):= m(j,i);
+  end loop;
+ end loop;
+return TEMP;
+end TRANSPOSE_MATRIX;
+
+PROCEDURE PRINT_MATRIX (m: IN MATRIX1; n: IN MATRIX2) is
+i,j:INTEGER;
+begin
+PUT_LINE(" ARRAY m: ");
+ FOR i IN 1..4 loop
+  FOR j IN 1..5 loop
+  PUT(m(i,j));
+  end loop;
+ NEW_LINE;
+ end loop;
+PUT_LINE(" ARRAY n: ");
+ FOR i IN 1..5 loop
+  FOR j IN 1..4 loop
+  PUT(n(i,j));
+  end loop;
+ NEW_LINE;
+ end loop;
+end PRINT_MATRIX;
+
+begin --PROG6
+count:=1;
+ FOR i IN 1..4 loop
+  FOR j in 1..5 loop
+  m(i,j):= count;
+  n(j,i):= 0;
+  count:= count+1;
+  end loop;
+ end loop;
+PRINT_MATRIX(m,n);
+n:= TRANSPOSE_MATRIX(m,n);
+PRINT_MATRIX(m,n);
+end PROG6a;
+

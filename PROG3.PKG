@@ -1,0 +1,31 @@
+-- Program 3, uppercase converter. Norman King 10/7/1989
+WITH text_io; USE text_io;
+PROCEDURE prog3 is
+responce: character;
+word: string (1..40);
+last_read,n,count: integer;
+BEGIN
+<<again>>
+count:=0;
+
+FOR count in 1..40 loop   -- clear out word
+word(count):= ' ';
+END loop;
+
+PUT_LINE("Enter a string up to 40 characters:");
+GET_LINE(WORD,last_read);
+NEW_LINE;
+PUT_LINE("Thanks for your input! Scanning string.");
+
+FOR count in 1..last_read loop
+ N:= character'pos(word(count));
+ IF (word(count) in 'a'..'z')  THEN
+ word(count):=character'val(n-32);
+ END IF;
+PUT(".");
+END loop;
+
+PUT_LINE("Here is your word in uppercase form:");
+PUT_LINE(word);
+END prog3;
+

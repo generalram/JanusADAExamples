@@ -1,0 +1,40 @@
+	-- Program by Norman King, Program 2 for ADA class
+	-- Fibbonaci Sequence
+WITH TEXT_IO; USE TEXT_IO;
+PROCEDURE PROG2A is
+responce : CHARACTER;
+bucket1,bucket2,totalnum,counter,temp : INTEGER;
+PACKAGE int_io is NEW INTEGER_IO (INTEGER); USE int_io;
+BEGIN
+<<again>>
+counter:=0;
+bucket1:=0;
+bucket2:=0;
+totalnum:=0;
+PUT_LINE("Enter two numbers");
+PUT("Enter first number: ");
+GET(bucket1);
+PUT("Enter second number: ");
+GET(bucket2);
+PUT_LINE("And now the Fibbonaci Sequence...");
+PUT(bucket1);
+PUT(" ");
+PUT(bucket2);
+	FOR counter IN 1..10 LOOP
+	temp :=bucket2;
+	bucket2:= bucket1 + bucket2;
+      totalnum:= totalnum + bucket2;
+	PUT(" ");
+        PUT(bucket2);
+        bucket1:= temp;
+    END LOOP;
+PUT(" ");
+PUT(totalnum);
+NEW_LINE;
+    PUT_LINE("Want to compute another sequence? (y/n)?");
+    GET(responce);
+    IF (responce = 'Y') OR (responce = 'y') THEN
+    GOTO again;
+	END IF;
+	PUT_LINE("Good bye");
+END prog2a;

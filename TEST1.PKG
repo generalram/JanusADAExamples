@@ -1,0 +1,15 @@
+WITH text_io; use text_io;
+PROCEDURE test1 is
+vchar: string (1..4);
+count,n: integer;
+PACKAGE cint is new INTEGER (CHARACTER); use cint;
+begin
+FOR count in 1..4 loop
+vchar(count):= 'A';
+end loop;
+
+n:=integer(vchar(1));
+vchar(1):= character'val(33);
+put(vchar);
+end test1;
+
